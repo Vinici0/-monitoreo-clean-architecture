@@ -1,0 +1,26 @@
+# Node modules
+node_modules/
+
+# Dependency directories
+/dist/
+/.cache/
+
+# TypeScript build
+*.js
+*.js.map
+
+# IDE/Editor specific files
+.vscode/
+.idea/
+
+# Environment configuration
+.env
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
