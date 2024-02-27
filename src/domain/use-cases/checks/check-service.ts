@@ -3,11 +3,13 @@ interface CheckServiceUseCase {
   execute(url: string): Promise<boolean>;
 }
 
+//TODO: Utilizando la inyeccion de dependencias - cuando se un error o un exito se debe de llamar a una funcion
 type SuccessCallback = () => void;
 type ErrorCallback = (error: string) => void;
 
 export class CheckService implements CheckServiceUseCase {
   constructor(
+    //TODO: Utilizando la inyeccion de dependencias
     private successCallback: SuccessCallback,
     private errorCallback: ErrorCallback
   ) {}
