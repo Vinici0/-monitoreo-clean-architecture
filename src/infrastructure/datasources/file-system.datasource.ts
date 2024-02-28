@@ -22,11 +22,11 @@ export class FileSystemDataSource implements LogDataSource {
       (path) => {
         //TODO: Si el archivo no existe, lo crea
         if (fs.existsSync(path)) return;
-
         fs.writeFileSync(path, "");
       }
     );
   };
+
   async save(newLog: LogEntity): Promise<void> {
     const logAsJson = `${JSON.stringify(newLog)}\n`;
 
@@ -41,22 +41,21 @@ export class FileSystemDataSource implements LogDataSource {
     }
   }
 
-  private getLogsFromFile = ( path: string ): LogEntity[] => {
-    const content = fs.readFileSync( path, 'utf-8' );
-    const logs = content.split('\n').map(LogEntity.fromJson);
-    // const logs = content.split('\n').map( 
+  private getLogsFromFile = (path: string): LogEntity[] => {
+    const content = fs.readFileSync(path, "utf-8");
+    const logs = content.split("\n").map(LogEntity.fromJson);
+    // const logs = content.split('\n').map(
     //   log => LogEntity.fromJson(log)
     // );
-    
+
     return logs;
-  }
+  };
 
-  async getLogs( severityLevel: LogSeverityLevel ): Promise<LogEntity[]> {
-
-    switch( severityLevel ) {
+  async getLogs(severityLevel: LogSeverityLevel): Promise<LogEntity[]> {
+    switch (severityLevel) {
       case LogSeverityLevel.low:
         return this.getLogsFromFile(this.allLogsPath);
-      
+
       case LogSeverityLevel.medium:
         return this.getLogsFromFile(this.mediumLogsPath);
 
@@ -64,9 +63,7 @@ export class FileSystemDataSource implements LogDataSource {
         return this.getLogsFromFile(this.highLogsPath);
 
       default:
-        throw new Error(`${ severityLevel } not implemented`);
+        throw new Error(`${severityLevel} not implemented`);
     }
-
-
-  } 
+  }
 }
